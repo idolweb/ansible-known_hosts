@@ -53,7 +53,10 @@ then
 fi
 
 have_host=$(ssh-keygen -F $keygen_name -f $file)
-have_ip=$(ssh-keygen -F $ip -f $file)
+if [ -n "$ip" ]
+then
+    have_ip=$(ssh-keygen -F $ip -f $file)
+fi
 have="$have_host$have_ip"
 
 if [ -n "$have" -a $state == "absent" ]
