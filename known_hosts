@@ -44,10 +44,10 @@ then
   touch $file
 fi
 
-ip=$(dig $host +short)
+ip=$(dig $host +short | tail -n 1)
 
 keygen_name=$host
-if [ -z "$port" -a $port -ne 22 ]
+if [ -n "$port" -a $port -ne 22 ]
 then
   keygen_name="[$host]:$port"
 fi
@@ -83,9 +83,9 @@ then
       exit 1
     fi
   done
-  echo "{\"changed\": true}"
+  echo "{\"changed\": true }"
   exit
 fi
 
-echo "{\"changed\": false}"
+echo "{\"changed\": false }"
 exit
